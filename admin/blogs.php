@@ -1,4 +1,10 @@
-<?php include 'header.php' ?>
+<?php 
+include 'header.php';
+$qry = "SELECT * FROM blogs";
+include '../dbconnection.php';
+$result = mysqli_query($conn, $qry);
+include '../closeconnection.php';
+?>
     <h2 class="text-3xl font-bold">Blogs</h2>
     <hr class="h-1 bg-blue-600">
     <div class="text-right mt-5">
@@ -12,16 +18,23 @@
             <th class="border p-2">Description</th>
             <th class="border p-2">Action</th>
         </tr>
+        <?php 
+            while($row = mysqli_fetch_assoc($result))
+            {   
+        ?>
         <tr>
-            <td class="border p-2">2021-01-01</td>
-            <td class="border p-2">Blog 1</td>
-            <td class="border p-2"><img src="https://picsum.photos/200/200" alt="" class="w-20 h-20 object-cover rounded"></td>
-            <td class="border p-2 w-1/2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, sapiente?</td>
+            <td class="border p-2"><?php echo $row['blog_date']; ?></td>
+            <td class="border p-2"><?php echo $row['title']; ?></td>
+            <td class="border p-2"><img src="../uploads/<?php echo $row['photopath']; ?>" alt="" class="w-20 h-20 object-cover rounded"></td>
+            <td class="border p-2 w-1/2"><?php echo $row['description'] ?></td>
             <td class="border p-2 text-center">
-                <a href="" class="bg-blue-600 px-3 py-1 rounded text-white">Edit</a>
+                <a href="editblog.php?id=<?php echo $row['id'];?>" class="bg-blue-600 px-3 py-1 rounded text-white">Edit</a>
                 <a href="" class="bg-red-600 px-3 py-1 rounded text-white">Delete</a>
             </td>
         </tr>
+        <?php
+            }
+        ?>
         
     </table>
 <?php include 'footer.php' ?>  

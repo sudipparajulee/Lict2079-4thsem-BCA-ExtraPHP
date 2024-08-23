@@ -1,5 +1,5 @@
 <?php include 'header.php'; ?>
-    <h2 class="text-3xl font-bold">Create Blog</h2>
+    <h2 class="text-3xl font-bold">Edit Blog</h2>
     <hr class="h-1 bg-blue-600">
     <form action="actionblog.php" method="POST" enctype="multipart/form-data">
         <input type="date" class="p-2 rounded block my-4 border w-full" name="date">
