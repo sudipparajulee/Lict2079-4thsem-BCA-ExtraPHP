@@ -29,7 +29,7 @@ include '../closeconnection.php';
             <td class="border p-2 w-1/2"><?php echo $row['description'] ?></td>
             <td class="border p-2 text-center">
                 <a href="editblog.php?id=<?php echo $row['id'];?>" class="bg-blue-600 px-3 py-1 rounded text-white">Edit</a>
-                <a href="" class="bg-red-600 px-3 py-1 rounded text-white">Delete</a>
+                <a href="actionblog.php?deleteid=<?php echo $row['id']?>" class="bg-red-600 px-3 py-1 rounded text-white" onclick="return confirm('Are you sure to Delete?')">Delete</a>
             </td>
         </tr>
         <?php
