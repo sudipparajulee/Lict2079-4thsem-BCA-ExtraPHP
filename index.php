@@ -1,3 +1,9 @@
+<?php
+$qry = "SELECT * FROM blogs ORDER BY blog_date DESC LIMIT 3";
+include "dbconnection.php";
+$result = mysqli_query($conn, $qry);
+include "closeconnection.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,24 +27,19 @@
     </nav>
     <h2 class="font-bold text-center mt-5 text-blue-700 text-xl">Our Blogs</h2>
     <div class="grid grid-cols-3 gap-10 px-24 mt-10">
+        <?php
+        while($row = mysqli_fetch_assoc($result))
+        {
+        ?>
         <div class="bg-gray-100 p-2 rounded shadow-md">
-            <img src="https://picsum.photos/500/500" alt="" class="w-full h-40 object-cover rounded">
-            <h3 class="font-bold text-lg">Blog 1</h3>
-            <p class="text-sm mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, sapiente?</p>
+            <img src="uploads/<?php echo $row['photopath'] ?>" alt="" class="w-full h-40 object-cover rounded">
+            <h3 class="font-bold text-lg"><?php echo $row['title']; ?></h3>
+            <p class="text-sm mt-3 line-clamp-1"><?php echo $row['description']; ?></p>
             <a class="bg-blue-900 text-white px-3 py-1 mt-5 inline-block" href="">Read More</a>
         </div>
-        <div class="bg-gray-100 p-2 rounded shadow-md">
-            <img src="https://picsum.photos/400/500" alt="" class="w-full h-40 object-cover rounded">
-            <h3 class="font-bold text-lg">Blog 1</h3>
-            <p class="text-sm mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, sapiente?</p>
-            <a class="bg-blue-900 text-white px-3 py-1 mt-5 inline-block" href="">Read More</a>
-        </div>
-        <div class="bg-gray-100 p-2 rounded shadow-md">
-            <img src="https://picsum.photos/500/400" alt="" class="w-full h-40 object-cover rounded">
-            <h3 class="font-bold text-lg">Blog 1</h3>
-            <p class="text-sm mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, sapiente?</p>
-            <a class="bg-blue-900 text-white px-3 py-1 mt-5 inline-block" href="">Read More</a>
-        </div>
+        <?php
+        }
+        ?>
     </div>
 
     <footer class="bg-blue-900 text-white pt-5 mt-10">
